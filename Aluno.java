@@ -2,6 +2,15 @@ package curso;
 
 public class Aluno {
 
+	/*
+	  O aluno possui as seguintes informações:
+		- Nome do aluno
+		- Semestre do aluno
+		- Matrícula do aluno
+		- Idade do aluno
+		- Sexo do aluno
+	 */
+
 	private String nome;
 	private int semestre;
 	private String matricula;
@@ -83,11 +92,11 @@ public class Aluno {
 	@Override
 	public String toString() {
 		return "Aluno{" +
-					"nome=" + nome + 
-					"semestre=" + semestre  +
-					"matricula=" + matricula  +
-					"idade=" + idade +
-					"sexo=" + sexo   +
+					"nome='" + nome + '\'' +
+					"semestre='" + semestre + '\'' +
+					"matricula='" + matricula + '\'' +
+					"idade='" + idade + '\'' +
+					"sexo='" + sexo + '\'' +
 					"}";
 		
 	}

@@ -2,6 +2,13 @@ package curso;
 
 public class Semestre {
 
+    /*
+      Informações da classe:
+      - Número do semestre
+      - Ano do semestre
+      - 7 disciplinas
+     */
+
     private int numero;
     private Disciplina discA;
     private Disciplina discB;
@@ -80,6 +87,7 @@ public class Semestre {
         this.discG = discG;
     }
 
+    //recebe como parâmetro o índice da disciplina e o estado (se está ou não em curso)
     public void setDisciplinaEmCurso(int numDisciplina, boolean estado) {
         switch (numDisciplina) {
             case 1:
@@ -106,6 +114,7 @@ public class Semestre {
         }
     }
 
+    //Recebe como parâmetro um índice da disciplina e o estado (se foi ou não concluída)
     public void setDisciplinaConclusao(int numDisciplina, boolean estado) {
         switch (numDisciplina) {
             case 1:
