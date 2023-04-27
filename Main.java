@@ -5,17 +5,20 @@ import curso.Aluno;
 
 import java.util.Scanner;
 
-
 public class Main {
 
     private static Scanner sc;
     public static void main(String[] args) {
-        String userName = "";
+        String userName = "", matricula = "";
         String retStr;
+        Aluno aluno;
+        //Preenche infromações padrão do curso
+        Curso curso = preencheMateriasNoCurso();
         char sexo = 0;
         int idade;
         char SouN = 0;
-        int opcoes;
+        int opcoes, automaticoOuManual;
+        int semestreAtual, semestreTemp;
 
         sc = new Scanner(System.in);
 
@@ -76,11 +79,100 @@ public class Main {
             System.out.println("1) Utilizar informações de aluno pré-preenchido;");
             System.out.println("2) Utilizar minhas informações atuais;");
 
-            opcoes = sc.nextInt();
+            automaticoOuManual = sc.nextInt();
             sc.nextLine();
-        } while(opcoes < 1 || opcoes > 2);
+        } while(automaticoOuManual < 1 || automaticoOuManual > 2);
 
-        //Chec
+
+        if (automaticoOuManual == 1) {
+            aluno = getAlunoDefault();
+            getCursoInfoDefault(curso);
+
+
+        } else {
+
+        }
+
+        do {
+            do {
+                System.out.println(userName + ", por favor, escolha uma das opções abaixo:");
+                System.out.println("1) Listar todas as matérias de um semestre");
+                System.out.println("2) Listar todas as matérias de todos os semestres");
+                System.out.println("3) Listar matérias concluídas de um semestre");
+                System.out.println("4) Listar matérias concluídas de todos os semestres");
+                System.out.println("5) Listar matérias em curso de um semestre");
+                System.out.println("6) Listar matérias em curso de todos os semestres");
+                System.out.println("7) Listar matérias não concluídas de um semestre");
+                System.out.println("8) Listar matérias não concluídas de todos os semestres");
+                System.out.println("9) Editar semestre");
+                System.out.println("0) Sair");
+                try {
+                    opcoes = sc.nextInt();
+                    sc.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Por favor, insira um valor numérico válido!");
+                    opcoes = -1;
+                    sc.nextLine();
+                }
+            } while (opcoes < 0);
+
+            switch (opcoes) {
+                case 0:
+                    System.out.println("Saindo da aplicação...");
+                    break;
+                case 1:
+                    do {
+                        System.out.println(userName + ", selecione o semestre (de 1 a 8):");
+                        semestreTemp = sc.nextInt();
+                        sc.nextLine();
+                    } while(semestreTemp < 1 || semestreTemp > 8);
+                    curso.getSemestre(semestreTemp).listarDisciplinasSemestre();
+
+                    break;
+                case 2:
+                    curso.listarTodasDisciplinas();
+                    break;
+                case 3:
+                    do {
+                        System.out.println(userName + ", selecione o semestre (de 1 a 8):");
+                        semestreTemp = sc.nextInt();
+                        sc.nextLine();
+                    } while(semestreTemp < 1 || semestreTemp > 8);
+                    curso.getSemestre(semestreTemp).listarDisciplinasCompletas();
+                    break;
+                case 4:
+                    curso.listarDisciplinasCursadas();
+                    break;
+                case 5:
+                    do {
+                        System.out.println(userName + ", selecione o semestre (de 1 a 8):");
+                        semestreTemp = sc.nextInt();
+                        sc.nextLine();
+                    } while(semestreTemp < 1 || semestreTemp > 8);
+                    curso.getSemestre(semestreTemp).listarDisciplinasEmCurso();
+                    break;
+                case 6:
+                    curso.listarDisciplinasEmCurso();
+                    break;
+                case 7:
+                    do {
+                        System.out.println(userName + ", selecione o semestre (de 1 a 8):");
+                        semestreTemp = sc.nextInt();
+                        sc.nextLine();
+                    } while(semestreTemp < 1 || semestreTemp > 8);
+                    curso.getSemestre(semestreTemp).listarDisciplinasEmFalta();
+                    break;
+                case 8:
+                    curso.listarDisciplinasQueFaltam();
+                    break;
+                case 9:
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        } while(opcoes > 0);
+
+        System.out.println("Adeus, " + userName);
 
         sc.close();
     }
@@ -98,7 +190,25 @@ public class Main {
     //Preenche com informações predefinidas as informações do aluno
     private static void getCursoInfoDefault(Curso curso) {
 
+        curso.concluirDisciplina(1, 1);
+        curso.concluirDisciplina(1, 2);
+        curso.concluirDisciplina(1, 3);
+        curso.concluirDisciplina(1, 4);
+        curso.concluirDisciplina(1, 5);
+        curso.concluirDisciplina(1, 6);
+        curso.concluirDisciplina(1, 7);
 
+        curso.concluirDisciplina(2, 1);
+        curso.concluirDisciplina(2, 2);
+        curso.concluirDisciplina(2, 3);
+        curso.concluirDisciplina(2, 4);
+        curso.concluirDisciplina(2, 5);
+        curso.concluirDisciplina(2, 6);
+        curso.concluirDisciplina(2, 7);
+
+        curso.inscreverNaDisciplinaEmCurso(3, 1);
+        curso.inscreverNaDisciplinaEmCurso(3, 2);
+        curso.inscreverNaDisciplinaEmCurso(3, 3);
 
         return;
     }
@@ -199,7 +309,7 @@ public class Main {
         semestreH = new Semestre(8, discA, discB, discC, discD, discE, discF, discG, "2026-2");
 
         //Preenche o curso com os semestres
-        tmpCurso = new Curso();
+        tmpCurso = new Curso("Ciências da Computação", "Noturno", semestreA, semestreB, semestreC, semestreD, semestreE, semestreF, semestreG, semestreH);
 
         //Retorna o curso com os semestres preenchidos
         return tmpCurso;

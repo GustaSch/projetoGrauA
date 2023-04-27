@@ -46,6 +46,9 @@ public class Disciplina {
 
     public void setConclusao(boolean conclusao) {
         this.conclusao = conclusao;
+        if (conclusao == true) {
+            this.emCurso = false;
+        }
     }
 
     public boolean isEmCurso() {
@@ -53,7 +56,13 @@ public class Disciplina {
     }
 
     public void setEmCurso(boolean emCurso) {
-        this.emCurso = emCurso;
+        if (emCurso == true && this.conclusao == true)
+        {
+            System.out.println("Curso já concluído!");
+            this.emCurso = false;
+        } else {
+            this.emCurso = emCurso;
+        }
     }
 
     public Disciplina(String nome, int creditos, String codigo) {
