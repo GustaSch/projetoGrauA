@@ -1,14 +1,113 @@
+import curso.Curso;
 import curso.Disciplina;
 import curso.Semestre;
+import curso.Aluno;
+
+import java.util.Scanner;
+
 
 public class Main {
+
+    private static Scanner sc;
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        String userName = "";
+        String retStr;
+        char sexo = 0;
+        int idade;
+        char SouN = 0;
+        int opcoes;
+
+        sc = new Scanner(System.in);
+
+        //Coleta de nome do usuário
+        do {
+            System.out.println("Olá, por favor, insira seu nome:");
+            userName = sc.nextLine();
+        } while(userName.isEmpty());
+
+        //Coleta de idade do usuário
+        do {
+            System.out.println(userName + ", por favor, insira sua idade:");
+            try {
+                idade = sc.nextInt();
+                sc.nextLine();
+            } catch (Exception e) {
+                System.out.println("Por favor, insira um valor numérico válido!");
+                idade = -1;
+                sc.nextLine();
+            }
+
+        } while(idade <= 0);
+
+        //Checagem de idade
+        if (idade > 150) {
+            System.out.println("Uau, " + idade + "anos! Você deve ter passado por muita coisa na vida...");
+            System.out.println("Infelizmente, consideraremos que você possui apenas 150 anos.");
+            idade = 150;
+        } else if (idade < 18) {
+            do {
+                System.out.println(userName + ", seus pais deixam você estudar aqui com essa idade? (S ou N)");
+                retStr = sc.nextLine();
+                if (retStr.length() > 0) {
+                    SouN = retStr.charAt(0);
+                }
+            } while(SouN != 's' && SouN != 'S' && SouN != 'n' && SouN != 'N');
+
+            if (SouN == 's' || SouN == 'S') {
+                System.out.println("Ainda bem, pode prosseguir.");
+            } else {
+                System.out.println("Você não está autorizado, saindo...");
+                return;
+            }
+        }
+
+        //Coleta de sexo do usuário
+        do {
+            System.out.println("Olá " + userName + ", por favor, insira seu sexo (M ou F):");
+            retStr = sc.nextLine();
+            if (retStr.length() > 0) {
+                sexo = retStr.charAt(0);
+            }
+        } while(sexo != 'm' && sexo != 'M' && sexo != 'f' && sexo != 'F');
+
+        //Verifica se será utilizado um aluno pré-preenchido, ou se será utilizada as informações atuais do usuário
+        do {
+            System.out.println(userName + ", escolha uma das opções abaixo:");
+            System.out.println("1) Utilizar informações de aluno pré-preenchido;");
+            System.out.println("2) Utilizar minhas informações atuais;");
+
+            opcoes = sc.nextInt();
+            sc.nextLine();
+        } while(opcoes < 1 || opcoes > 2);
+
+        //Chec
+
+        sc.close();
     }
 
-    private static void preencheSemestresAlunos()
+    //Retorna informações predefinidas de um aluno
+    private static Aluno getAlunoDefault(){
+        Aluno tmpAluno;
+
+        //Aluno predefinido
+        tmpAluno = new Aluno("Gustavo", 2, "123123123", 20, 'M');
+
+        return tmpAluno;
+    }
+
+    //Preenche com informações predefinidas as informações do aluno
+    private static void getCursoInfoDefault(Curso curso) {
+
+
+
+        return;
+    }
+
+    //Preenche as matérias do curso nos semestres do curso
+    private static Curso preencheMateriasNoCurso()
     {
         //Preenche informação dos 8 semestres
+        Curso tmpCurso;
         Semestre semestreA;
         Semestre semestreB;
         Semestre semestreC;
@@ -27,6 +126,7 @@ public class Main {
         discE = new Disciplina("Pensamento Computacional", 4, "30850");
         discF = new Disciplina("Desenvolvimento Pessoal e Profissional: Colaboração", 4, "10539");
         discG = new Disciplina("", 0, "");
+        semestreA = new Semestre(1, discA, discB, discC, discD, discE, discF, discG, "2023-1");
 
         //Segundo semestre:
         discA = new Disciplina("Matemática para Computação", 4, "60662");
@@ -36,7 +136,7 @@ public class Main {
         discE = new Disciplina("Comunicação da Ciência", 4, "10534");
         discF = new Disciplina("Ética e Tecnocultura", 4, "10536");
         discG = new Disciplina("Desenvolvimento Pessoal e Profissional: Liderança", 1, "10540");
-
+        semestreB = new Semestre(2, discA, discB, discC, discD, discE, discF, discG, "2023-2");
 
         //Terceiro semestre:
         discA = new Disciplina("Fundamentos de Sistemas Operacionais", 4, "60968");
@@ -46,7 +146,7 @@ public class Main {
         discE = new Disciplina("Cálculo Diferencial", 4, "60800");
         discF = new Disciplina("Empreendedorismo e Solução de Problemas", 4, "50758");
         discG = new Disciplina("Desenvolvimento Pessoal e Profissional: Protagonismo", 1, "10541");
-
+        semestreC = new Semestre(3, discA, discB, discC, discD, discE, discF, discG, "2024-1");
 
         //Quarto semestre
         discA = new Disciplina("Algoritmos e Programação: Grafos, Hashing e Heaps", 4, "60972");
@@ -56,6 +156,7 @@ public class Main {
         discE = new Disciplina("Engenharia de Software: Análise", 4, "60976");
         discF = new Disciplina("Análise de dados para tomada de decisão", 4, "10533");
         discG = new Disciplina("Desenvolvimento Pessoal e Profissional: Interfaces", 1, "10542");
+        semestreD = new Semestre(4, discA, discB, discC, discD, discE, discF, discG, "2024-2");
 
         //Quinto semestre
         discA = new Disciplina("Linguagens Formais e Autômatos", 4, "60977");
@@ -65,6 +166,7 @@ public class Main {
         discE = new Disciplina("Engenharia de Software: Projeto", 4, "60979");
         discF = new Disciplina("Cálculo Integral", 4, "60801");
         discG = new Disciplina("Desenvolvimento Pessoal e Profissional: Conexões", 1, "10543");
+        semestreE = new Semestre(5, discA, discB, discC, discD, discE, discF, discG, "2025-1");
 
         //Sexto semestre
         discA = new Disciplina("Teoria da Computação", 4, "60031");
@@ -74,6 +176,7 @@ public class Main {
         discE = new Disciplina("Teoria da Informação: Compressão e Criptografia", 4, "60983");
         discF = new Disciplina("Elaboração de Projetos", 4, "93903");
         discG = new Disciplina("Engenharia de Software: Implementação e Teste", 4, "60984");
+        semestreF = new Semestre(6, discA, discB, discC, discD, discE, discF, discG, "2025-2");
 
         //Sétimo semestre
         discA = new Disciplina("Tradutores", 4, "93926");
@@ -83,6 +186,7 @@ public class Main {
         discE = new Disciplina("Computação Gráfica", 4, "60381");
         discF = new Disciplina("Projeto Aplicado I (Trilha)", 4, "---");
         discG = new Disciplina("Optativa (Trilha)", 4, "---");
+        semestreG = new Semestre(7, discA, discB, discC, discD, discE, discF, discG, "2026-1");
 
         //Oitavo semestre
         discA = new Disciplina("Internet das Coisas: Sensores, Protocolos e Aplicações", 4, "60988");
@@ -92,7 +196,12 @@ public class Main {
         discE = new Disciplina("Optativa (Trilha)", 4, "---");
         discF = new Disciplina("Optativa", 4, "---");
         discG = new Disciplina("", 0, "");
+        semestreH = new Semestre(8, discA, discB, discC, discD, discE, discF, discG, "2026-2");
 
+        //Preenche o curso com os semestres
+        tmpCurso = new Curso();
 
+        //Retorna o curso com os semestres preenchidos
+        return tmpCurso;
     }
 }

@@ -60,6 +60,9 @@ public class Disciplina {
         this.nome = nome;
         this.creditos = creditos;
         this.codigo = codigo;
+        this.nota = 0;
+        this.emCurso = false;
+        this.conclusao = false;
     }
 
     @Override

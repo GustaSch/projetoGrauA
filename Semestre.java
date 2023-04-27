@@ -8,6 +8,8 @@ public class Semestre {
     private Disciplina discC;
     private Disciplina discD;
     private Disciplina discE;
+    private Disciplina discF;
+    private Disciplina discG;
     private String ano;
 
     public int getNumero() {
@@ -62,6 +64,74 @@ public class Semestre {
         this.discE = discE;
     }
 
+    public Disciplina getDiscF() {
+        return discF;
+    }
+
+    public void setDiscF(Disciplina discF) {
+        this.discF = discF;
+    }
+
+    public Disciplina getDiscG() {
+        return discG;
+    }
+
+    public void setDiscG(Disciplina discG) {
+        this.discG = discG;
+    }
+
+    public void setDisciplinaEmCurso(int numDisciplina, boolean estado) {
+        switch (numDisciplina) {
+            case 1:
+                this.discA.setEmCurso(estado);
+                break;
+            case 2:
+                this.discB.setEmCurso(estado);
+                break;
+            case 3:
+                this.discC.setEmCurso(estado);
+                break;
+            case 4:
+                this.discD.setEmCurso(estado);
+                break;
+            case 5:
+                this.discE.setEmCurso(estado);
+                break;
+            case 6:
+                this.discF.setEmCurso(estado);
+                break;
+            case 7:
+                this.discG.setEmCurso(estado);
+                break;
+        }
+    }
+
+    public void setDisciplinaConclusao(int numDisciplina, boolean estado) {
+        switch (numDisciplina) {
+            case 1:
+                this.discA.setConclusao(estado);
+                break;
+            case 2:
+                this.discB.setConclusao(estado);
+                break;
+            case 3:
+                this.discC.setConclusao(estado);
+                break;
+            case 4:
+                this.discD.setConclusao(estado);
+                break;
+            case 5:
+                this.discE.setConclusao(estado);
+                break;
+            case 6:
+                this.discF.setConclusao(estado);
+                break;
+            case 7:
+                this.discG.setConclusao(estado);
+                break;
+        }
+    }
+
     public String getAno() {
         return ano;
     }
@@ -80,22 +150,26 @@ public class Semestre {
     public String toString() {
         return "Semestre{" +
                 "numero=" + numero +
-                ", discA=" + discA +
+                ", discA=" + discA.toString() +
                 ", discB=" + discB +
                 ", discC=" + discC +
                 ", discD=" + discD +
                 ", discE=" + discE +
+                ", discF=" + discF +
+                ", discG=" + discG +
                 ", ano='" + ano + '\'' +
                 '}';
     }
 
-    public Semestre(int numero, Disciplina discA, Disciplina discB, Disciplina discC, Disciplina discD, Disciplina discE, String ano) {
+    public Semestre(int numero, Disciplina discA, Disciplina discB, Disciplina discC, Disciplina discD, Disciplina discE, Disciplina discF, Disciplina discG, String ano) {
         setNumero(numero);
         setDiscA(discA);
         setDiscB(discB);
         setDiscC(discC);
         setDiscD(discD);
         setDiscE(discE);
+        setDiscF(discF);
+        setDiscG(discG);
         setAno(ano);
     }
 
@@ -107,6 +181,8 @@ public class Semestre {
         tmpStr += discC.toString() + "\n";
         tmpStr += discD.toString() + "\n";
         tmpStr += discE.toString() + "\n";
+        tmpStr += discF.toString() + "\n";
+        tmpStr += discG.toString() + "\n";
 
         System.out.println(tmpStr);
     }
@@ -131,6 +207,14 @@ public class Semestre {
 
         if (discE.isConclusao()) {
             tmpStr += discE.toString() + "\n";
+        }
+
+        if (discF.isConclusao()) {
+            tmpStr += discF.toString() + "\n";
+        }
+
+        if (discG.isConclusao()) {
+            tmpStr += discG.toString() + "\n";
         }
 
         if (tmpStr.length() > 1) {
@@ -164,6 +248,14 @@ public class Semestre {
             tmpStr += discE.toString() + "\n";
         }
 
+        if (discF.isEmCurso()) {
+            tmpStr += discF.toString() + "\n";
+        }
+
+        if (discG.isEmCurso()) {
+            tmpStr += discG.toString() + "\n";
+        }
+
         if (tmpStr.length() > 1) {
             tmpStr = "Semestre: " + this.numero + "\nAno: " + this.ano + "\n" + tmpStr;
         } else {
@@ -195,6 +287,15 @@ public class Semestre {
             tmpStr += discE.toString() + "\n";
         }
 
+        if (!discF.isEmCurso() && !discF.isConclusao()) {
+            tmpStr += discF.toString() + "\n";
+        }
+
+        if (!discG.isEmCurso() && !discG.isConclusao()) {
+            tmpStr += discG.toString() + "\n";
+        }
+
+
         if (tmpStr.length() > 1) {
             tmpStr = "Semestre: " + this.numero + "\nAno: " + this.ano + "\n" + tmpStr;
         } else {
@@ -224,6 +325,14 @@ public class Semestre {
 
         if (discE.isEmCurso()) {
             creditosSemestre += discE.getCreditos();
+        }
+
+        if (discF.isEmCurso()) {
+            creditosSemestre += discF.getCreditos();
+        }
+
+        if (discG.isEmCurso()) {
+            creditosSemestre += discG.getCreditos();
         }
 
         if (creditosSemestre > 0) {
