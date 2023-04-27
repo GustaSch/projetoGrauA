@@ -83,11 +83,11 @@ public class Aluno {
 	@Override
 	public String toString() {
 		return "Aluno{" +
-					"nome=" + nome + "\"" +
-					"semestre=" + semestre + "\"" +
-					"matricula=" + matricula + "\"" +
+					"nome=" + nome + 
+					"semestre=" + semestre  +
+					"matricula=" + matricula  +
 					"idade=" + idade +
-					"sexo=" + sexo + "\"" +
+					"sexo=" + sexo   +
 					"}";
 		
 	}
