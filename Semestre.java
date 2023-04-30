@@ -3,10 +3,13 @@ package curso;
 public class Semestre {
 
     /*
-      Informações da classe:
+        Classe: Engloba grupos de disciplinas por semestres, e permite a edição de seus estados
+      através de métodos.
+
+      Informações da classe Semestre:
       - Número do semestre
       - Ano do semestre
-      - 7 disciplinas
+      - 7 disciplinas (com proteções para os casos com 6 disciplinas)
      */
 
     private int numero;
@@ -23,6 +26,7 @@ public class Semestre {
         return numero;
     }
 
+    //Define o número do semestre (de 1 a 8)
     public void setNumero(int numero) {
         if(numero > 0 && numero <= 8){
             this.numero = numero;
@@ -87,7 +91,8 @@ public class Semestre {
         this.discG = discG;
     }
 
-    //recebe como parâmetro o índice da disciplina e o estado (se está ou não em curso)
+    //recebe como parâmetro o índice da disciplina e o estado (se está ou não em curso) e seta
+    //o curso da disciplina
     public void setDisciplinaEmCurso(int numDisciplina, boolean estado) {
         switch (numDisciplina) {
             case 1:
@@ -114,6 +119,7 @@ public class Semestre {
         }
     }
 
+    //Retorna a disciplina baseado no número recebido como parâmetro
     public Disciplina getDisciplina(int numDisciplina) {
         switch (numDisciplina) {
             case 1:
@@ -208,6 +214,7 @@ public class Semestre {
         setAno(ano);
     }
 
+    //Lista as disciplinas do semestre
     public void listarDisciplinasSemestre() {
         String tmpStr;
         tmpStr = "Semestre: " + this.numero + "\nAno: " + this.ano + "\n";
@@ -222,6 +229,7 @@ public class Semestre {
         System.out.println(tmpStr);
     }
 
+    //Lista as disciplinas concluídas do semestre
     public void listarDisciplinasCompletas() {
         String tmpStr = "";
         if (discA.isConclusao()) {
@@ -261,6 +269,7 @@ public class Semestre {
         System.out.println(tmpStr);
     }
 
+    //Lista as disciplinas atualmente em curso
     public void listarDisciplinasEmCurso() {
         String tmpStr = "";
         if (discA.isEmCurso()) {
@@ -300,6 +309,7 @@ public class Semestre {
         System.out.println(tmpStr);
     }
 
+    //Lista as disciplinas atualmente em falta (que não foram concluídas) no semestre
     public void listarDisciplinasEmFalta() {
         String tmpStr = "";
         if (!discA.isEmCurso() && !discA.isConclusao()) {
@@ -340,6 +350,7 @@ public class Semestre {
         System.out.println(tmpStr);
     }
 
+    //Retorna a quantidade de créditos utilizados no semestre
     public int getCreditosUtilizados() {
         int creditosSemestre = 0;
         if (discA.isEmCurso()) {

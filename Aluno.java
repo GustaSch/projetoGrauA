@@ -3,6 +3,9 @@ package curso;
 public class Aluno {
 
 	/*
+		Classe: A classe Aluno é encarregada de portar as informações sobre o aluno cadastrado
+	  no curso.
+
 	  O aluno possui as seguintes informações:
 		- Nome do aluno
 		- Semestre do aluno
@@ -16,7 +19,8 @@ public class Aluno {
 	private String matricula;
 	private int idade;
 	private char sexo;
-	
+
+	//Construtor da classe de aluno com parâmetros predefinidos
 	public Aluno(String nome, int semestre, String matricula, int idade, char sexo) {
 		this.nome = nome;
 		this.semestre = semestre;
@@ -25,6 +29,7 @@ public class Aluno {
 		this.sexo = sexo;
 	}
 
+	//Construtor vazio da classe
 	public Aluno() {}
 	
 	public String getNome() {
@@ -39,6 +44,7 @@ public class Aluno {
 		return semestre;
 	}
 
+	//Configura o semestre atual de um aluno no curso
 	public void setSemestre(int semestre) {
 		
 		if((semestre > 0) && (semestre <= 8)) {
@@ -52,6 +58,7 @@ public class Aluno {
 		return matricula;
 	}
 
+	//Controla o número de matrícula de um aluno
 	public void setMatricula(String matricula) {
 		boolean eNum = (matricula != null && matricula.matches("[0-9]+"));
 		
@@ -67,6 +74,7 @@ public class Aluno {
 		return idade;
 	}
 
+	//Limita a idade de um aluno do curso
 	public void setIdade(int idade) {
 		
 		if(idade <= 100 && idade > 0) {
@@ -80,6 +88,7 @@ public class Aluno {
 		return sexo;
 	}
 
+	//Controla o sexo de um aluno
 	public void setSexo(char sexo) {
 		
 		if(sexo == 'F' || sexo == 'M' || sexo == 'm' || sexo == 'f') {
@@ -89,6 +98,7 @@ public class Aluno {
 		}
 	}
 
+	//Retorna as informações do aluno em uma string
 	@Override
 	public String toString() {
 		return "Aluno{" +
