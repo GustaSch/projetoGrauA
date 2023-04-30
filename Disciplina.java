@@ -37,7 +37,9 @@ public class Disciplina {
     }
 
     public void setNota(double nota) {
-        this.nota = nota;
+        if(nota >= 0 || nota <= 10) {
+            this.nota = nota;
+        }
     }
 
     public boolean isConclusao() {
@@ -45,10 +47,16 @@ public class Disciplina {
     }
 
     public void setConclusao(boolean conclusao) {
-        this.conclusao = conclusao;
+
         if (conclusao == true) {
-            this.emCurso = false;
+            if (this.nota < 6) {
+                System.out.println(this.nome + " não pode ser concluída pois a nota está abaixo da média.");
+                return;
+            } else {
+                this.emCurso = false;
+            }
         }
+        this.conclusao = conclusao;
     }
 
     public boolean isEmCurso() {
@@ -76,13 +84,17 @@ public class Disciplina {
 
     @Override
     public String toString() {
-        return "Disciplina{" +
-                "nome='" + nome + '\'' +
-                ", creditos=" + creditos +
-                ", codigo='" + codigo + '\'' +
-                ", nota=" + nota +
-                ", conclusao=" + conclusao +
-                ", emCurso=" + emCurso +
-                '}';
+        if (!nome.isEmpty()) {
+            return "Disciplina{" +
+                    "nome='" + nome + '\'' +
+                    ", creditos=" + creditos +
+                    ", codigo='" + codigo + '\'' +
+                    ", nota=" + nota +
+                    ", conclusao=" + conclusao +
+                    ", emCurso=" + emCurso +
+                    '}';
+        } else {
+            return "";
+        }
     }
 }

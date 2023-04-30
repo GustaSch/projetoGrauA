@@ -176,14 +176,14 @@ public class Curso {
 
         String tmpStr;
         tmpStr = "Curso: " + this.nome + "\nTurno: " + this.turno + "\n";
-        tmpStr += semestreA.toString() + "\n";
-        tmpStr += semestreB.toString() + "\n";
-        tmpStr += semestreC.toString() + "\n";
-        tmpStr += semestreD.toString() + "\n";
-        tmpStr += semestreE.toString() + "\n";
-        tmpStr += semestreF.toString() + "\n";
-        tmpStr += semestreG.toString() + "\n";
-        tmpStr += semestreH.toString() + "\n";
+        semestreA.listarDisciplinasSemestre();
+        semestreB.listarDisciplinasSemestre();
+        semestreC.listarDisciplinasSemestre();
+        semestreD.listarDisciplinasSemestre();
+        semestreE.listarDisciplinasSemestre();
+        semestreF.listarDisciplinasSemestre();
+        semestreG.listarDisciplinasSemestre();
+        semestreH.listarDisciplinasSemestre();
 
         System.out.println(tmpStr);
 
@@ -265,33 +265,33 @@ public class Curso {
         }
     }
 
-    public void concluirDisciplina(int semestre, int disciplina) {
+    public void concluirDisciplina(int semestre, int disciplina, double nota) {
 
         switch(semestre) {
 
             case 1:
-                semestreA.setDisciplinaConclusao(disciplina, true);
+                semestreA.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 2:
-                semestreB.setDisciplinaConclusao(disciplina, true);
+                semestreB.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 3:
-                semestreC.setDisciplinaConclusao(disciplina, true);
+                semestreC.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 4:
-                semestreD.setDisciplinaConclusao(disciplina, true);
+                semestreD.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 5:
-                semestreE.setDisciplinaConclusao(disciplina, true);
+                semestreE.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 6:
-                semestreF.setDisciplinaConclusao(disciplina, true);
+                semestreF.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 7:
-                semestreG.setDisciplinaConclusao(disciplina, true);
+                semestreG.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 8:
-                semestreH.setDisciplinaConclusao(disciplina, true);
+                semestreH.setDisciplinaConclusao(disciplina, true, nota);
                 break;
         }
     }

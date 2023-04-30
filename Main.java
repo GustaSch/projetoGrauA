@@ -17,8 +17,8 @@ public class Main {
         char sexo = 0;
         int idade;
         char SouN = 0;
-        int opcoes, automaticoOuManual;
-        int semestreAtual, semestreTemp;
+        int opcoes, automaticoOuManual, subOpcao;
+        int semestreAtual, semestreTemp, disciplinaTemp;
 
         sc = new Scanner(System.in);
 
@@ -88,9 +88,35 @@ public class Main {
             aluno = getAlunoDefault();
             getCursoInfoDefault(curso);
 
-
         } else {
+            do {
+                System.out.println(userName + ", insira sua matrícula:");
+                matricula = sc.nextLine();
+            } while(matricula.isEmpty());
 
+            do {
+                System.out.println(userName + ", insira o último semestre que você concluiu completamente (de 0 a 8):");
+                semestreAtual = sc.nextInt();
+                sc.nextLine();
+            } while(semestreAtual < 0 || semestreAtual > 8);
+
+            if (semestreAtual == 0) {
+                semestreAtual = 1;
+            } else {
+                System.out.println("OBS: A nota padrão inserida será de 6.0 nos semestres já concluídos.");
+                for(int i = 1; i <= semestreAtual; i++) {
+                    curso.concluirDisciplina(i, 1, 6.0);
+                    curso.concluirDisciplina(i, 2, 6.0);
+                    curso.concluirDisciplina(i, 3, 6.0);
+                    curso.concluirDisciplina(i, 4, 6.0);
+                    curso.concluirDisciplina(i, 5, 6.0);
+                    curso.concluirDisciplina(i, 6, 6.0);
+                    if (!curso.getSemestre(i).getDiscG().getNome().isEmpty()) {
+                        curso.concluirDisciplina(i, 7, 6.0);
+                    }
+                }
+            }
+            aluno = new Aluno(userName, semestreAtual, matricula,idade,sexo);
         }
 
         do {
@@ -105,6 +131,7 @@ public class Main {
                 System.out.println("7) Listar matérias não concluídas de um semestre");
                 System.out.println("8) Listar matérias não concluídas de todos os semestres");
                 System.out.println("9) Editar semestre");
+                System.out.println("10) Informações do Aluno");
                 System.out.println("0) Sair");
                 try {
                     opcoes = sc.nextInt();
@@ -166,6 +193,52 @@ public class Main {
                     curso.listarDisciplinasQueFaltam();
                     break;
                 case 9:
+
+                    do {
+                        System.out.println("1 - Inscrever em matéria");
+                        System.out.println("2 - Concluir a matéria");
+                        subOpcao = sc.nextInt();
+                        sc.nextLine();
+                    } while(subOpcao < 1 || subOpcao > 2);
+
+                    do {
+                        System.out.println(userName + ", selecione o semestre (de 1 a 8):");
+                        semestreTemp = sc.nextInt();
+                        sc.nextLine();
+                    } while(semestreTemp < 1 || semestreTemp > 8);
+
+                    curso.getSemestre(semestreTemp).listarDisciplinasSemestre();
+                    do {
+                        System.out.println(userName + ", selecione a disciplina (de 1 a 7):");
+                        disciplinaTemp = sc.nextInt();
+                        sc.nextLine();
+                    } while(disciplinaTemp < 1 || disciplinaTemp > 7);
+
+                    if (curso.getSemestre(semestreTemp).getDisciplina(disciplinaTemp) != null) {
+                        if (subOpcao == 1) {
+                            curso.inscreverNaDisciplinaEmCurso(semestreTemp, disciplinaTemp);
+                        } else if (subOpcao == 2) {
+                            double notaTemp;
+                            do {
+                                System.out.println(userName + ", insira sua nota (de 0 a 10):");
+                                try {
+                                notaTemp = sc.nextDouble();
+                                sc.nextLine();
+                                } catch (Exception e) {
+                                    System.out.println("Insira uma nota com vírgula!");
+                                    notaTemp = -1;
+                                }
+                            } while(notaTemp < 0.0 || notaTemp > 10.0);
+
+                            curso.concluirDisciplina(semestreTemp, disciplinaTemp, notaTemp);
+                        }
+                    } else {
+                        System.out.println("Disciplina inválida!");
+                    }
+
+                    break;
+                case 10:
+                    System.out.println(aluno.toString());
                     break;
                 default:
                     System.out.println("Opção inválida!");
@@ -190,27 +263,25 @@ public class Main {
     //Preenche com informações predefinidas as informações do aluno
     private static void getCursoInfoDefault(Curso curso) {
 
-        curso.concluirDisciplina(1, 1);
-        curso.concluirDisciplina(1, 2);
-        curso.concluirDisciplina(1, 3);
-        curso.concluirDisciplina(1, 4);
-        curso.concluirDisciplina(1, 5);
-        curso.concluirDisciplina(1, 6);
-        curso.concluirDisciplina(1, 7);
+        curso.concluirDisciplina(1, 1, 8.0);
+        curso.concluirDisciplina(1, 2, 8.0);
+        curso.concluirDisciplina(1, 3, 8.0);
+        curso.concluirDisciplina(1, 4, 8.0);
+        curso.concluirDisciplina(1, 5, 8.0);
+        curso.concluirDisciplina(1, 6, 8.0);
+        curso.concluirDisciplina(1, 7, 8.0);
 
-        curso.concluirDisciplina(2, 1);
-        curso.concluirDisciplina(2, 2);
-        curso.concluirDisciplina(2, 3);
-        curso.concluirDisciplina(2, 4);
-        curso.concluirDisciplina(2, 5);
-        curso.concluirDisciplina(2, 6);
-        curso.concluirDisciplina(2, 7);
+        curso.concluirDisciplina(2, 1,8.2);
+        curso.concluirDisciplina(2, 2,8.2);
+        curso.concluirDisciplina(2, 3,8.2);
+        curso.concluirDisciplina(2, 4,8.2);
+        curso.concluirDisciplina(2, 5,8.2);
+        curso.concluirDisciplina(2, 6,8.2);
+        curso.concluirDisciplina(2, 7,8.2);
 
         curso.inscreverNaDisciplinaEmCurso(3, 1);
         curso.inscreverNaDisciplinaEmCurso(3, 2);
         curso.inscreverNaDisciplinaEmCurso(3, 3);
-
-        return;
     }
 
     //Preenche as matérias do curso nos semestres do curso
