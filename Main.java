@@ -1,7 +1,4 @@
-import curso.Curso;
-import curso.Disciplina;
-import curso.Semestre;
-import curso.Aluno;
+package curso;
 
 import java.util.Scanner;
 

@@ -51,7 +51,7 @@ public class Disciplina {
         if (conclusao == true) {
             if (this.nota < 6) {
                 System.out.println(this.nome + " não pode ser concluída pois a nota está abaixo da média.");
-                return;
+                conclusao = false;
             } else {
                 this.emCurso = false;
             }
