@@ -3,10 +3,13 @@ package curso;
 public class Semestre {
 
     /*
-      Informações da classe:
+        Classe: Engloba grupos de disciplinas por semestres, e permite a edição de seus estados
+      através de métodos.
+
+      Informações da classe Semestre:
       - Número do semestre
       - Ano do semestre
-      - 7 disciplinas
+      - 7 disciplinas (com proteções para os casos com 6 disciplinas)
      */
 
     private int numero;
@@ -23,6 +26,7 @@ public class Semestre {
         return numero;
     }
 
+    //Define o número do semestre (de 1 a 8)
     public void setNumero(int numero) {
         if(numero > 0 && numero <= 8){
             this.numero = numero;
@@ -87,7 +91,8 @@ public class Semestre {
         this.discG = discG;
     }
 
-    //recebe como parâmetro o índice da disciplina e o estado (se está ou não em curso)
+    //recebe como parâmetro o índice da disciplina e o estado (se está ou não em curso) e seta
+    //o curso da disciplina
     public void setDisciplinaEmCurso(int numDisciplina, boolean estado) {
         switch (numDisciplina) {
             case 1:
@@ -114,28 +119,61 @@ public class Semestre {
         }
     }
 
-    //Recebe como parâmetro um índice da disciplina e o estado (se foi ou não concluída)
-    public void setDisciplinaConclusao(int numDisciplina, boolean estado) {
+    //Retorna a disciplina baseado no número recebido como parâmetro
+    public Disciplina getDisciplina(int numDisciplina) {
         switch (numDisciplina) {
             case 1:
+                return this.discA;
+            case 2:
+                return this.discB;
+            case 3:
+                return this.discC;
+            case 4:
+                return this.discD;
+            case 5:
+                return this.discE;
+            case 6:
+                return this.discF;
+            case 7:
+                if (!this.discG.getNome().isEmpty()) {
+                    return this.discG;
+                } else {
+                    return null;
+                }
+            default:
+                return null;
+        }
+    }
+
+    //Recebe como parâmetro um índice da disciplina e o estado (se foi ou não concluída)
+    public void setDisciplinaConclusao(int numDisciplina, boolean estado, double nota) {
+        switch (numDisciplina) {
+            case 1:
+                this.discA.setNota(nota);
                 this.discA.setConclusao(estado);
                 break;
             case 2:
+                this.discB.setNota(nota);
                 this.discB.setConclusao(estado);
                 break;
             case 3:
+                this.discC.setNota(nota);
                 this.discC.setConclusao(estado);
                 break;
             case 4:
+                this.discD.setNota(nota);
                 this.discD.setConclusao(estado);
                 break;
             case 5:
+                this.discE.setNota(nota);
                 this.discE.setConclusao(estado);
                 break;
             case 6:
+                this.discF.setNota(nota);
                 this.discF.setConclusao(estado);
                 break;
             case 7:
+                this.discG.setNota(nota);
                 this.discG.setConclusao(estado);
                 break;
         }
@@ -146,13 +184,7 @@ public class Semestre {
     }
 
     public void setAno(String ano) {
-        boolean eNum = (ano != null && ano.matches("[0-9]+"));
-
-        if(eNum == true){
-            this.ano = ano;
-        } else {
-            this.ano = null;
-        }
+        this.ano = ano;
     }
 
     @Override
@@ -160,12 +192,12 @@ public class Semestre {
         return "Semestre{" +
                 "numero=" + numero +
                 ", discA=" + discA.toString() +
-                ", discB=" + discB +
-                ", discC=" + discC +
-                ", discD=" + discD +
-                ", discE=" + discE +
-                ", discF=" + discF +
-                ", discG=" + discG +
+                ", discB=" + discB.toString() +
+                ", discC=" + discC.toString() +
+                ", discD=" + discD.toString() +
+                ", discE=" + discE.toString() +
+                ", discF=" + discF.toString() +
+                ", discG=" + discG.toString() +
                 ", ano='" + ano + '\'' +
                 '}';
     }
@@ -182,6 +214,7 @@ public class Semestre {
         setAno(ano);
     }
 
+    //Lista as disciplinas do semestre
     public void listarDisciplinasSemestre() {
         String tmpStr;
         tmpStr = "Semestre: " + this.numero + "\nAno: " + this.ano + "\n";
@@ -196,6 +229,7 @@ public class Semestre {
         System.out.println(tmpStr);
     }
 
+    //Lista as disciplinas concluídas do semestre
     public void listarDisciplinasCompletas() {
         String tmpStr = "";
         if (discA.isConclusao()) {
@@ -235,6 +269,7 @@ public class Semestre {
         System.out.println(tmpStr);
     }
 
+    //Lista as disciplinas atualmente em curso
     public void listarDisciplinasEmCurso() {
         String tmpStr = "";
         if (discA.isEmCurso()) {
@@ -274,6 +309,7 @@ public class Semestre {
         System.out.println(tmpStr);
     }
 
+    //Lista as disciplinas atualmente em falta (que não foram concluídas) no semestre
     public void listarDisciplinasEmFalta() {
         String tmpStr = "";
         if (!discA.isEmCurso() && !discA.isConclusao()) {
@@ -314,6 +350,7 @@ public class Semestre {
         System.out.println(tmpStr);
     }
 
+    //Retorna a quantidade de créditos utilizados no semestre
     public int getCreditosUtilizados() {
         int creditosSemestre = 0;
         if (discA.isEmCurso()) {

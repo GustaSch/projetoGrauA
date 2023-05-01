@@ -1,6 +1,11 @@
 package curso;
 
-import java.text.DecimalFormat;
+/*
+      Classe: A classe curso engloba todas as informações relacionadas ao curso inteiro, ou seja,
+    inclui todos os semestres, e consequentemente todas suas disciplinas, o aluno, o turno,
+    e o nome do curso.
+        Também permite editar e ler esses parâmetros através de seus métodos.
+ */
 
 public class Curso {
 
@@ -149,6 +154,7 @@ public class Curso {
     }
 
 
+    //Retorna o semestre baseado no índice do parâmetro
     public Semestre getSemestre(int semestreIndex) {
         switch (semestreIndex) {
             case 1:
@@ -172,23 +178,25 @@ public class Curso {
         }
     }
 
+    //Lista todas as disciplinas de todos os semestres
     public void listarTodasDisciplinas() {
 
         String tmpStr;
         tmpStr = "Curso: " + this.nome + "\nTurno: " + this.turno + "\n";
-        tmpStr += semestreA.toString() + "\n";
-        tmpStr += semestreB.toString() + "\n";
-        tmpStr += semestreC.toString() + "\n";
-        tmpStr += semestreD.toString() + "\n";
-        tmpStr += semestreE.toString() + "\n";
-        tmpStr += semestreF.toString() + "\n";
-        tmpStr += semestreG.toString() + "\n";
-        tmpStr += semestreH.toString() + "\n";
+        semestreA.listarDisciplinasSemestre();
+        semestreB.listarDisciplinasSemestre();
+        semestreC.listarDisciplinasSemestre();
+        semestreD.listarDisciplinasSemestre();
+        semestreE.listarDisciplinasSemestre();
+        semestreF.listarDisciplinasSemestre();
+        semestreG.listarDisciplinasSemestre();
+        semestreH.listarDisciplinasSemestre();
 
         System.out.println(tmpStr);
 
     }
 
+    //Lista todas as disciplinas já concluídas de todos os semestres
     public void listarDisciplinasCursadas() {
 
         String tmpStr;
@@ -204,6 +212,7 @@ public class Curso {
         semestreH.listarDisciplinasCompletas();
     }
 
+    //Lista todas as disciplinas atualmente em curso de todos os semestres
     public void listarDisciplinasEmCurso() {
 
         String tmpStr;
@@ -219,6 +228,7 @@ public class Curso {
         semestreH.listarDisciplinasEmCurso();
     }
 
+    //Lista todas as disciplinas que faltam de todos os semestres
     public void listarDisciplinasQueFaltam() {
 
         String tmpStr;
@@ -234,6 +244,7 @@ public class Curso {
         semestreH.listarDisciplinasEmFalta();
     }
 
+    //Inscreve o aluno na disciplina do semestre passados como parâmetro
     public void inscreverNaDisciplinaEmCurso(int semestre, int disciplina) {
 
         switch(semestre) {
@@ -265,37 +276,39 @@ public class Curso {
         }
     }
 
-    public void concluirDisciplina(int semestre, int disciplina) {
+    //Conclui a disciplina do semestre do aluno com uma nota passados como parâmetro
+    public void concluirDisciplina(int semestre, int disciplina, double nota) {
 
         switch(semestre) {
 
             case 1:
-                semestreA.setDisciplinaConclusao(disciplina, true);
+                semestreA.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 2:
-                semestreB.setDisciplinaConclusao(disciplina, true);
+                semestreB.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 3:
-                semestreC.setDisciplinaConclusao(disciplina, true);
+                semestreC.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 4:
-                semestreD.setDisciplinaConclusao(disciplina, true);
+                semestreD.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 5:
-                semestreE.setDisciplinaConclusao(disciplina, true);
+                semestreE.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 6:
-                semestreF.setDisciplinaConclusao(disciplina, true);
+                semestreF.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 7:
-                semestreG.setDisciplinaConclusao(disciplina, true);
+                semestreG.setDisciplinaConclusao(disciplina, true, nota);
                 break;
             case 8:
-                semestreH.setDisciplinaConclusao(disciplina, true);
+                semestreH.setDisciplinaConclusao(disciplina, true, nota);
                 break;
         }
     }
 
+    //Constutor da classe do Curso
     public Curso(String nome, String turno, Semestre semestreA, Semestre semestreB, Semestre semestreC, Semestre semestreD, Semestre semestreE, Semestre semestreF, Semestre semestreG, Semestre semestreH) {
         this.nome = nome;
         this.turno = turno;
