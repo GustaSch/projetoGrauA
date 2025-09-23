@@ -41,6 +41,7 @@ public class Main {
         char SouN = 0;
         int opcoes, automaticoOuManual, subOpcao;
         int semestreAtual, semestreTemp, disciplinaTemp;
+        int teste;
 
         sc = new Scanner(System.in);
 
